@@ -1,1 +1,763 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!--
+  连思颖 · 个人学术主页（单栏 / Jon Barron 式）
+  内容来源：iCloud「238-税务-连思颖.pdf」中文页 + 英文页
+  需要你补的三处，搜索「待补」定位：
+  1. 头像（见 .bio 区块注释）
+  2. 论文 PDF / Slides 链接（Publications 里的标签目前是纯文本，没有跳转）
+  3. Google Scholar / GitHub 主页链接（页首 links 里被注释掉了）
+-->
+<title>连思颖 Lian Siying</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@500;600;700&display=swap">
+<style>
+  /* ── 色彩令牌：与简历页共用同一套，先在 :root 定义完整浅色 ── */
+  :root {
+    color-scheme: light;
+    --paper: #FBFBFD;
+    --surface: #F3F5F9;
+    --ink: #131722;
+    --ink-soft: #4A5265;
+    --ink-faint: #8A92A3;
+    --line: #E3E6ED;
+    --line-strong: #C9CFDC;
+    --accent: #12377B;
+    --accent-soft: #EAEFF8;
+    --warm: #A5342C;
 
+    --font-serif: "Noto Serif SC", "Songti SC", "SimSun", Georgia, serif;
+    --font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --gutter: clamp(1.25rem, 5vw, 2.5rem);
+    /* News 的日期栏与 Publications 的缩略图栏，宽度统一，让全页左栏对齐 */
+    --date-col: 5.5rem;
+    --thumb-col: 7.5rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper: #0E1116;
+      --surface: #171B24;
+      --ink: #E9EBF1;
+      --ink-soft: #A6AEBD;
+      --ink-faint: #6F7787;
+      --line: #262C38;
+      --line-strong: #39414F;
+      --accent: #8FB0EC;
+      --accent-soft: #1B2436;
+      --warm: #D98F86;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #0E1116;
+    --surface: #171B24;
+    --ink: #E9EBF1;
+    --ink-soft: #A6AEBD;
+    --ink-faint: #6F7787;
+    --line: #262C38;
+    --line-strong: #39414F;
+    --accent: #8FB0EC;
+    --accent-soft: #1B2436;
+    --warm: #D98F86;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: calc(50rem + var(--gutter) * 2);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3.5rem, 8vw, 6rem);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  /* ── 页首：头像 + 身份 + 简介 ── */
+  .bio {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .portrait {
+    width: 9rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .portrait--placeholder {
+    display: grid;
+    place-items: center;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 2.6rem;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .bio__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    min-width: 0;
+  }
+
+  .name {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: clamp(1.85rem, 5.5vw, 2.4rem);
+    line-height: 1.2;
+    letter-spacing: 0.03em;
+  }
+
+  .name__en {
+    margin-left: 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.42em;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  .affil {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+
+  .links {
+    margin: 0.15rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+  }
+
+  .links a { color: var(--accent); }
+
+  .about {
+    margin: 0.5rem 0 0;
+    font-size: 0.94rem;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+  }
+
+  .about strong { font-weight: 600; color: var(--ink); }
+
+  /* ── 章节标题：中文主标 + 英文副标 + 下方细线 ── */
+  .sec {
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+  }
+
+  .sec__head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .sec__head h2 {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+  }
+
+  .sec__head span {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+  }
+
+  /* ── News：日期栏 + 正文，日期全页对齐 ── */
+  .news {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .news li {
+    display: grid;
+    grid-template-columns: var(--date-col) minmax(0, 1fr);
+    gap: 0.2rem 1.25rem;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+  }
+
+  .news time {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.03em;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-faint);
+    padding-top: 0.32rem;
+  }
+
+  .news strong { font-weight: 600; color: var(--ink); }
+
+  /* ── 论文：缩略图栏 + 正文 ── */
+  .pubs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .pub {
+    display: grid;
+    grid-template-columns: var(--thumb-col) minmax(0, 1fr);
+    gap: 0.2rem 1.5rem;
+  }
+
+  .thumb {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--surface);
+    display: block;
+  }
+
+  .thumb rect { fill: var(--line-strong); }
+  .thumb .thumb__cap { fill: var(--line); }
+
+  .pub__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 0;
+  }
+
+  .pub__title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .pub__authors {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+
+  .pub__authors b { font-weight: 700; color: var(--ink); }
+
+  .pub__venue {
+    margin: 0;
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  .pub__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.25rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    padding: 0.1rem 0.5rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 2px;
+    color: var(--ink-faint);
+  }
+
+  /* ── 经历条目 ── */
+  .items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+
+  .item {
+    display: grid;
+    grid-template-columns: var(--date-col) minmax(0, 1fr);
+    gap: 0.2rem 1.25rem;
+  }
+
+  .item__when {
+    padding-top: 0.32rem;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.03em;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-faint);
+  }
+
+  .item__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    min-width: 0;
+  }
+
+  .item__title {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  .item__org { font-weight: 400; color: var(--ink-soft); }
+
+  .item__note {
+    margin: 0;
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  .item__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .item__list li {
+    position: relative;
+    padding-left: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+  }
+
+  .item__list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.9em;
+    width: 0.38rem;
+    height: 1px;
+    background: var(--line-strong);
+  }
+
+  .item__list strong { font-weight: 600; color: var(--ink); }
+
+  /* ── 获奖：两栏铺开，条目多时不拖成长条 ── */
+  .awards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 0.55rem 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .awards li {
+    position: relative;
+    padding-left: 1rem;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+
+  .awards li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.88em;
+    width: 0.38rem;
+    height: 1px;
+    background: var(--line-strong);
+  }
+
+  .awards b { font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+  /* ── 页脚 ── */
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.03em;
+    color: var(--ink-faint);
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  a:hover { text-decoration: underline; text-underline-offset: 0.28em; }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ── 窄屏：左栏（日期 / 缩略图）收到正文上方 ── */
+  @media (max-width: 640px) {
+    .bio {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
+    }
+    .portrait { width: 6.5rem; }
+    .news li,
+    .item {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.15rem;
+    }
+    .news time,
+    .item__when { padding-top: 0; }
+    .pub {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.75rem;
+    }
+    .thumb { max-width: 11rem; }
+    .sec__head { flex-wrap: wrap; gap: 0.35rem 0.85rem; }
+  }
+
+  @media print {
+    :root {
+      --paper: #FFFFFF;
+      --surface: #FFFFFF;
+      --ink: #000000;
+      --ink-soft: #333333;
+      --ink-faint: #6B6B6B;
+      --line: #D2D2D2;
+      --line-strong: #AAAAAA;
+      --accent: #12377B;
+      --accent-soft: #EEF2F9;
+    }
+    body { background: #FFFFFF; }
+    .page { max-width: none; padding-inline: 0; padding-block: 0; gap: 1.5rem; }
+    .item, .pub { break-inside: avoid; }
+  }
+</style>
+
+<main class="page">
+
+  <!-- ══ 页首 ══ -->
+  <div class="bio">
+    <!-- 待补 1：换成你的照片。把下面整个 div 替换为：
+         <img class="portrait" src="photo.jpg" alt="连思颖">
+         建议正方形（至少 600×600），人像居中，页面会自动裁成圆形。 -->
+    <div class="portrait portrait--placeholder" aria-hidden="true">连</div>
+
+    <div class="bio__text">
+      <h1 class="name">连思颖<span class="name__en">Lian Siying</span></h1>
+      <p class="affil">复旦大学经济学院 · 税务专业硕士研究生</p>
+
+      <p class="links">
+        <a href="mailto:26210680238@m.fudan.edu.cn">26210680238@m.fudan.edu.cn</a>
+        <a href="../resume/index.html">简历 / CV</a>
+        <!-- 待补 3：有主页后取消注释并填链接
+        <a href="#">Google Scholar</a>
+        <a href="#">GitHub</a>
+        -->
+      </p>
+
+      <p class="about">
+        我是复旦大学经济学院税务专业硕士研究生，2026 年入学，此前在中南财经政法大学会计学院取得财务管理学士学位（专业排名 <strong>1 / 71</strong>，加权平均 95.41 / 100）。研究兴趣集中在公司金融与公司治理、绿色金融与企业融资，以及税收政策对企业行为的影响。做研究习惯从原始材料出发 —— 从梳理近二十年绿色金融政策文本、手工整理上市公司年报，到用 2SLS 处理内生性，都亲手来做。
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ News ══ -->
+  <section class="sec" aria-labelledby="s-news">
+    <div class="sec__head">
+      <h2 id="s-news">动态</h2>
+      <span>News</span>
+    </div>
+    <ul class="news">
+      <li>
+        <time datetime="2026-09">2026.09</time>
+        <span>入学复旦大学经济学院，攻读<strong>税务专业硕士研究生</strong></span>
+      </li>
+      <li>
+        <time datetime="2026-06">2026.06</time>
+        <span>本科毕业于中南财经政法大学财务管理专业，专业排名 <strong>1 / 71</strong>，获校级优秀毕业生、校级优秀毕业论文</span>
+      </li>
+      <li>
+        <time datetime="2026-02">2026.02</time>
+        <span>完成毕业论文《管理者短视主义会影响企业人力资本结构吗？》（第一作者）</span>
+      </li>
+      <li>
+        <time datetime="2025-09">2025.09</time>
+        <span>经推免夏令营拟录取至复旦大学经济学院税务专业</span>
+      </li>
+      <li>
+        <time datetime="2025-06">2025.06</time>
+        <span>省级大学生创新创业训练计划项目结项</span>
+      </li>
+      <li>
+        <time datetime="2025-04">2025.04</time>
+        <span>合作论文《绿色业务发展与重污染企业的融资困境》完成（第二作者）</span>
+      </li>
+      <li>
+        <time datetime="2025-03">2025.03</time>
+        <span>完成国家自然科学基金面上项目子课题研究助理工作</span>
+      </li>
+      <li>
+        <time datetime="2025-02">2025.02</time>
+        <span>结束国泰君安证券建材组（新财富建材组第一）研究实习</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ══ Publications ══ -->
+  <section class="sec" aria-labelledby="s-pubs">
+    <div class="sec__head">
+      <h2 id="s-pubs">论文</h2>
+      <span>Publications &amp; Working Papers</span>
+    </div>
+    <div class="pubs">
+
+      <article class="pub">
+        <!-- 待补 2：换成论文配图。把 <svg> 换成 <img class="thumb" src="fig1.png" alt=""> -->
+        <svg class="thumb" viewBox="0 0 120 90" aria-hidden="true" focusable="false">
+          <rect class="thumb__cap" x="10" y="12" width="52" height="5" rx="1"/>
+          <rect x="10" y="26" width="100" height="3" rx="1"/>
+          <rect x="10" y="35" width="94" height="3" rx="1"/>
+          <rect x="10" y="44" width="100" height="3" rx="1"/>
+          <rect x="10" y="53" width="82" height="3" rx="1"/>
+          <rect x="10" y="68" width="64" height="3" rx="1"/>
+          <rect x="10" y="77" width="90" height="3" rx="1"/>
+        </svg>
+        <div class="pub__body">
+          <h3 class="pub__title">管理者短视主义会影响企业人力资本结构吗？</h3>
+          <p class="pub__authors"><b>连思颖</b></p>
+          <p class="pub__venue">本科毕业论文 · 工作论文，2026</p>
+          <div class="pub__tags">
+            <span class="tag">PDF</span>
+            <span class="tag">Slides</span>
+            <span class="tag">BibTeX</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="pub">
+        <svg class="thumb" viewBox="0 0 120 90" aria-hidden="true" focusable="false">
+          <rect class="thumb__cap" x="10" y="12" width="64" height="5" rx="1"/>
+          <rect x="10" y="26" width="100" height="3" rx="1"/>
+          <rect x="10" y="35" width="88" height="3" rx="1"/>
+          <rect x="10" y="44" width="100" height="3" rx="1"/>
+          <rect x="10" y="53" width="76" height="3" rx="1"/>
+          <rect x="10" y="68" width="58" height="3" rx="1"/>
+          <rect x="10" y="77" width="94" height="3" rx="1"/>
+        </svg>
+        <div class="pub__body">
+          <h3 class="pub__title">绿色业务发展与重污染企业的融资困境</h3>
+          <p class="pub__authors">第二作者</p>
+          <p class="pub__venue">国家自然科学基金面上项目子课题成果 · 工作论文，2025</p>
+          <div class="pub__tags">
+            <span class="tag">PDF</span>
+            <span class="tag">BibTeX</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ══ Research ══ -->
+  <section class="sec" aria-labelledby="s-research">
+    <div class="sec__head">
+      <h2 id="s-research">科研经历</h2>
+      <span>Research Experience</span>
+    </div>
+    <div class="items">
+
+      <article class="item">
+        <div class="item__when">2025.01 – 2025.03</div>
+        <div class="item__body">
+          <h3 class="item__title">国家自然科学基金面上项目 · 子课题 <span class="item__org">· 研究助理</span></h3>
+          <p class="item__note">《重污染企业开展绿色环保业务的效果研究》</p>
+          <ul class="item__list">
+            <li>从突破融资困境、加强业务协同、促进股权债券融资等视角，分析绿色环保业务对重污染企业绿色转型与技术创新的影响</li>
+            <li>搜集绿色转型专项文件与政府工作报告，梳理绿色金融制度背景与近 <strong>20 年</strong>政策演进；整理重污染企业发展现状与困境资料，根据项目书绘制研究思路图</li>
+            <li>同期以第二作者完成论文《绿色业务发展与重污染企业的融资困境》，负责上市公司年报数据采集、GEPI 变量构造、回归与机制检验、稳健性与内生性处理</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="item__when">2023.12 – 2025.06</div>
+        <div class="item__body">
+          <h3 class="item__title">全国大学生创新创业训练计划（省级） <span class="item__org">· 核心成员</span></h3>
+          <ul class="item__list">
+            <li>从农村商业银行数字化转型的视角，探究金融数字化对农村创业的影响及其作用机制</li>
+            <li>精读 <strong>50 余篇</strong>专业文献，撰写引言、文献综述、理论分析与研究假设；完成问卷设计与实地采访</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ══ Industry ══ -->
+  <section class="sec" aria-labelledby="s-industry">
+    <div class="sec__head">
+      <h2 id="s-industry">业界经历</h2>
+      <span>Industry Experience</span>
+    </div>
+    <div class="items">
+
+      <article class="item">
+        <div class="item__when">2024.12 – 2025.02</div>
+        <div class="item__body">
+          <h3 class="item__title">国泰君安证券 <span class="item__org">· 建材组（新财富建材组第一） · 研究实习生</span></h3>
+          <ul class="item__list">
+            <li>从「现金奶牛」视角分析检测行业在经济下行周期中的现金流优势与抗风险逻辑；独立收集行业近十年数据，维护行业结构演变数据库</li>
+            <li>参与撰写国检集团覆盖报告《被低估的综合类检测「正规军」》，搭建「行业压力 — 业务韧性 — 新兴潜力 — 盈利优势」四维分析框架</li>
+            <li>通过数据库采集建材产量数据，基于图表分析更新周报</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="item__when">2024.06 – 2024.09</div>
+        <div class="item__body">
+          <h3 class="item__title">启赋私募基金管理有限公司 <span class="item__org">· 投资部 · 投资实习生</span></h3>
+          <ul class="item__list">
+            <li>参与深圳智谷天厨科技有限公司 A 轮融资项目，协助撰写投资建议书，分析中国餐饮行业及炒菜机器人行业竞争格局</li>
+            <li>更新基金募集说明书，整合储备项目清单，制作可视化数据看板展示 <strong>60 亿</strong>在管规模下已投企业 IPO 进程</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ══ Education ══ -->
+  <section class="sec" aria-labelledby="s-edu">
+    <div class="sec__head">
+      <h2 id="s-edu">教育背景</h2>
+      <span>Education</span>
+    </div>
+    <div class="items">
+
+      <article class="item">
+        <div class="item__when">2026.09 – 2028.06</div>
+        <div class="item__body">
+          <h3 class="item__title">复旦大学 <span class="item__org">· 经济学院 · 税务专业 · 硕士</span></h3>
+          <ul class="item__list">
+            <li>2025 年通过推免夏令营由经济学院税务专业拟录取</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="item__when">2022.09 – 2026.06</div>
+        <div class="item__body">
+          <h3 class="item__title">中南财经政法大学 <span class="item__org">· 会计学院 · 财务管理 · 本科</span></h3>
+          <p class="item__note">GPA 3.98 / 4.00　|　专业排名 1 / 71　|　加权平均 95.41 / 100</p>
+          <ul class="item__list">
+            <li><strong>核心课程：</strong>财务管理学、国际财务管理、中级财务会计、公司理财、货币金融学、微观经济学、宏观经济学、组织行为学</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ══ Service ══ -->
+  <section class="sec" aria-labelledby="s-service">
+    <div class="sec__head">
+      <h2 id="s-service">学术服务</h2>
+      <span>Academic Service</span>
+    </div>
+    <div class="items">
+
+      <article class="item">
+        <div class="item__when">2024.03 – 2025.01</div>
+        <div class="item__body">
+          <h3 class="item__title">中南财经政法大学 会计学院 <span class="item__org">· 中南 · 会计 seminar 助理</span></h3>
+          <ul class="item__list">
+            <li>协助举办学院学术讲座，累计参与学术研讨会 <strong>20 余场</strong>，对接北京大学、复旦大学等高校教授及专家 <strong>20 余人</strong></li>
+            <li>负责学术报告、会议纪要与新闻报道撰写；梳理 <strong>20 余篇</strong>学术研究文章，产出内容均以「0 返修」标准在学院官网发表</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ══ Honors ══ -->
+  <section class="sec" aria-labelledby="s-honors">
+    <div class="sec__head">
+      <h2 id="s-honors">荣誉与奖励</h2>
+      <span>Honors &amp; Awards</span>
+    </div>
+    <ul class="awards">
+      <li>梧桐树奖学金（<b>全校 20 人</b>）</li>
+      <li>校级一等奖学金 ×2（<b>前 5%</b>）</li>
+      <li>远方创新奖学金（<b>前 1%</b>）</li>
+      <li>优秀学生标兵（<b>前 1%</b>）</li>
+      <li>校级优秀毕业生</li>
+      <li>校级优秀毕业论文</li>
+      <li>优秀共青团员</li>
+    </ul>
+  </section>
+
+  <!-- ══ Skills ══ -->
+  <section class="sec" aria-labelledby="s-skills">
+    <div class="sec__head">
+      <h2 id="s-skills">技能与兴趣</h2>
+      <span>Skills &amp; Interests</span>
+    </div>
+    <ul class="awards">
+      <li>Stata（回归分析、内生性处理）、Wind、iFind、Excel / PowerPoint</li>
+      <li>能独立完成企业价值分析与深度行业研究</li>
+      <li>CET-6 <b>611</b>（口语考试等级优秀）、CET-4 <b>607</b></li>
+      <li>摄影（约拍摄影师、摄影社团负责人）、健身</li>
+    </ul>
+  </section>
+
+  <footer class="footer">
+    <span>更新于 2026 年 9 月</span>
+    <span>复旦大学经济学院 · 税务专业</span>
+  </footer>
+
+</main>
